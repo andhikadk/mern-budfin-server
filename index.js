@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import userRoute from './routes/userRoute.js';
 import authRoute from './routes/authRoute.js';
+import transactionRoute from './routes/transactionRoute.js';
+import categoryRoute from './routes/categoryRoute.js';
 
 dotenv.config();
 const app = express();
@@ -34,6 +36,8 @@ app.use(express.json());
 // Routes
 app.use('/api', userRoute);
 app.use('/api', authRoute);
+app.use('/api', transactionRoute);
+app.use('/api', categoryRoute);
 app.all('*', (req, res) => {
   res.status(404).json({ message: 'Not found' });
 });
