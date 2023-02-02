@@ -6,6 +6,7 @@ import User from '../models/User.js';
 // @route   POST /api/login
 // @access  Public
 export const login = async (req, res) => {
+  // return res.status(404).json({ message: 'test' });
   try {
     const user = await User.find({ email: req.body.email });
     if (user.length < 1)
