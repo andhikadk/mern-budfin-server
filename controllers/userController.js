@@ -7,7 +7,7 @@ import User from '../models/User.js';
 // @access  Public
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({}, 'name email role');
+    const users = await User.find({}, 'name email role balance');
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -22,7 +22,7 @@ export const getUserById = async (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
   try {
-    const user = await User.findById(req.params.id, 'name email role');
+    const user = await User.findById(req.params.id, 'name email role balance');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
