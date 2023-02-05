@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-auth-starter",
+  "name": "budfin",
   "version": "1.0.0",
-  "description": "",
+  "description": "Budget and Finance App",
   "main": "index.js",
   "type": "module",
   "scripts": {

@@ -5,3 +5,6 @@ Content-Type: application/json
   "username": "admin",
   "password": "admin"
 }
+
+###
+GET http://localhost:5000/api/transactions

@@ -7,8 +7,22 @@ import User from '../models/User.js';
 // @access  Public
 export const getTransactions = async (req, res) => {
   try {
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) return res.sendStatus(401);
+    const authUser = await User.find({ refresh_token: refreshToken });
+    if (!authUser[0]) return res.sendStatus(403);
+    const user = authUser[0]._id;
+    if (authUser[0].role === 'admin') {
+      const transactions = await Transaction.find(
+        {},
+        'user category detail type amount date'
+      )
+        .populate('user', 'name')
+        .populate('category', 'name');
+      return res.status(200).json(transactions);
+    }
     const transactions = await Transaction.find(
-      {},
+      { user },
       'user category detail type amount date'
     )
       .populate('user', 'name')

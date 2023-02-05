@@ -6,7 +6,6 @@ import User from '../models/User.js';
 // @route   POST /api/login
 // @access  Public
 export const login = async (req, res) => {
-  // return res.status(404).json({ message: 'test' });
   try {
     const user = await User.find({ email: req.body.email });
     if (user.length < 1)
@@ -15,14 +14,14 @@ export const login = async (req, res) => {
     if (!match) {
       return res.status(401).json({ message: 'Password does not match' });
     }
-    const { _id, name, email, role } = user[0];
+    const { _id, name, email, balance, role } = user[0];
     const accessToken = jwt.sign(
-      { _id, name, email, role },
+      { _id, name, email, balance, role },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: '60s' }
     );
     const refreshToken = jwt.sign(
-      { _id, name, email, role },
+      { _id, name, email, balance, role },
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: '1d' }
     );
@@ -32,7 +31,7 @@ export const login = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
       secure: process.env.NODE_ENV === 'production',
     });
-    res.json({ accessToken });
+    res.json({ refreshToken });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -9,13 +9,13 @@ export const refreshToken = async (req, res) => {
     if (!user[0]) return res.sendStatus(403);
     jwt.verify(
       refreshToken,
-      process.env.REFRESH_SECRET_TOKEN,
+      process.env.REFRESH_TOKEN_SECRET,
       (err, decoded) => {
         if (err) return res.sendStatus(403);
-        const { _id, name, email, role } = user[0];
+        const { _id, name, email, balance, role } = user[0];
         const accessToken = jwt.sign(
-          { _id, name, email, role },
-          process.env.ACCESS_SECRET_TOKEN,
+          { _id, name, email, balance, role },
+          process.env.ACCESS_TOKEN_SECRET,
           {
             expiresIn: '15s',
           }
