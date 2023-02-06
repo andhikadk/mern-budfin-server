@@ -110,9 +110,9 @@ export const updateTransaction = async (req, res) => {
       return res.status(404).json({ message: 'Transaction not found' });
     }
     const { type, amount } = updatedTransaction;
-    const updated = await Transaction.findByIdAndUpdate(
+    await Transaction.findByIdAndUpdate(
       { _id: req.params.id },
-      { $set: req.body }
+      { $set: { ...req.body, updated_at: Date.now() } }
     );
     const updatedBalance = req.body.amount - amount;
     if (type === 'income') {

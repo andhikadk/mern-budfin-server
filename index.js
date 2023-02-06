@@ -42,7 +42,9 @@ app.all('*', (req, res) => {
   res.status(404).json({ message: 'Not found' });
 });
 
+const port = process.env.APP_PORT || 5000;
+
 // Server
-app.listen(process.env.APP_PORT, () => {
-  console.log(`Server running at http://localhost:${process.env.APP_PORT}`);
+app.listen(port, () => {
+  console.log(`Server running at port ${port}`);
 });
