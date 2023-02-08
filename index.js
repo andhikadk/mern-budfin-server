@@ -42,7 +42,7 @@ app.all('*', (req, res) => {
   res.status(404).json({ message: 'Not found' });
 });
 
-const port = process.env.APP_PORT || 5000;
+const port = process.env.PORT || 5000;
 
 // Server
 app.listen(port, () => {
