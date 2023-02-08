@@ -19,7 +19,7 @@ export const getTransactions = async (req, res) => {
       )
         .populate('user', 'name')
         .populate('category', 'name')
-        .sort({ created_at: -1 });
+        .sort({ date: -1, created_at: -1 });
       return res.status(200).json(transactions);
     }
     const transactions = await Transaction.find(
@@ -28,7 +28,7 @@ export const getTransactions = async (req, res) => {
     )
       .populate('user', 'name')
       .populate('category', 'name')
-      .sort({ created_at: -1 });
+      .sort({ date: -1, created_at: -1 });
     res.status(200).json(transactions);
   } catch (error) {
     res.status(500).json({ message: error.message });
