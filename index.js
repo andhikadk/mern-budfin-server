@@ -27,7 +27,7 @@ db.once('open', () => {
 app.use(
   cors({
     credentials: true,
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: process.env.CLIENT_URL.split(', '),
   })
 );
 app.use(cookieParser());
@@ -46,5 +46,5 @@ const port = process.env.PORT || 5000;
 
 // Server
 app.listen(port, () => {
-  console.log(`Server running at port ${port}`);
+  console.log('Server started');
 });
