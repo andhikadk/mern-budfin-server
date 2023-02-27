@@ -19,6 +19,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.0",
-    "mongoose-date-format-v2": "^1.2.2"
+    "mongoose-date-format-v2": "^1.2.2",
+    "validator": "^13.9.0"
   }
 }
