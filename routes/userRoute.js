@@ -11,8 +11,8 @@ import { verifyToken, adminOnly } from '../middleware/authUser.js';
 const router = express.Router();
 
 router
-  .get('/users', getUsers)
-  .get('/users/:id', getUserById)
+  .get('/users', verifyToken, adminOnly, getUsers)
+  .get('/users/:id', verifyToken, adminOnly, getUserById)
   .post('/users', createUser)
   .put('/users/:id', verifyToken, updateUser)
   .delete('/users/:id', verifyToken, adminOnly, deleteUser);
